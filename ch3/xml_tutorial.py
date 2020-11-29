@@ -38,3 +38,20 @@ for child in root:
 
 # Accesing child elements with an index.
 print(root[0].attrib["name"], root[0][1].text)
+
+# Iterate recursively over child item.
+print("#"*80)
+for neighbor in root.iter("neighbor"):
+    print(neighbor.attrib)
+
+for rank in root.iter("rank"):
+    print(rank.text)
+
+for country in root.iter("country"):
+    print(country.attrib["name"])
+
+# Find direct child item and get text and attribute values.
+for country in root.findall("country"):
+    name = country.get("name")
+    rank = country.find("rank").text
+    print(f"{name}: {rank}")
