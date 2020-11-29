@@ -55,3 +55,33 @@ for country in root.findall("country"):
     name = country.get("name")
     rank = country.find("rank").text
     print(f"{name}: {rank}")
+
+
+# Populate a Python dictionary.
+country_names_keys = [country.attrib["name"] for country in root]
+print("#"*80)
+print(country_names_keys)
+country_rank_values = [[rank.text for rank in country.findall("rank")] for country in root]
+print("#"*80)
+print(country_rank_values)
+print("#"*80)
+for country in root:
+    #print(country)
+    for rank in country.findall("rank"):
+        print(rank.text)
+
+print("#"*80)
+country_rank_values_2 = [rank.text for country in root for rank in country.findall("rank")]
+print(country_rank_values_2)
+test_list = []
+for country in root:
+    for rank in country.findall("rank"):
+        test_list.append(rank.text)
+
+print(test_list)
+
+csv_dict = zip(country_names_keys, country_rank_values_2)
+print(dict(csv_dict))
+
+# Export the extracted data to a csv file.
+
